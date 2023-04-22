@@ -8728,7 +8728,7 @@ menu
 		Infinity_PlaySound('GAM_03')
 		if(e:GetActiveEngine() == worldScreen) then
 			worldScreenWasPaused = worldScreen:CheckIfPaused()
-			if worldScreenWasPaused == false then
+			if worldScreenWasPaused == false and not e:IsMultiplayer() then
 				worldScreen:TogglePauseGame(true)
 			end
 		end
@@ -8741,10 +8741,9 @@ menu
 	onClose
 	"
 		if(e:GetActiveEngine() == worldScreen) then
-			if worldScreenWasPaused == false then
+			if worldScreenWasPaused == false and not e:IsMultiplayer() then
 				worldScreen:TogglePauseGame(true)
 			end
-			worldScreenWasPaused = false
 		end
 		Infinity_PlaySound('GAM_04')
 	"
@@ -22033,7 +22032,7 @@ function getJournalEntryRef(display, row)
 	end
 end
 function pauseJournal()
-	if not worldScreen:CheckIfPaused() then
+	if not worldScreen:CheckIfPaused() and not e:IsMultiplayer() then
 		worldScreen:TogglePauseGame(true)
 	end
 end
@@ -22061,7 +22060,7 @@ menu
 	onClose
 	"
 		showJournal = 0
-		if not wasPaused then
+		if not wasPaused and not e:IsMultiplayer() then
 			worldScreen:TogglePauseGame(true)
 		end
 	"
